@@ -1,17 +1,17 @@
-Golint is a linter for Go source code.
+Gofluff is a fork of the Golint tool, adding command line flags for suppressing specific warnings.
 
-[![Build Status](https://travis-ci.org/golang/lint.svg?branch=master)](https://travis-ci.org/golang/lint)
+[![Build Status](https://travis-ci.org/btubbs/gofluff.svg?branch=master)](https://travis-ci.org/btubbs/gofluff)
 
 ## Installation
 
-Golint requires Go 1.6 or later.
+Gofluff requires Go 1.6 or later.
 
-    go get -u github.com/golang/lint/golint
+    go get -u github.com/btubbs/gofluff/gofluff
 
 ## Usage
 
-Invoke `golint` with one or more filenames, directories, or packages named
-by its import path. Golint uses the same
+Invoke `gofluff` with one or more filenames, directories, or packages named
+by its import path. Gofluff uses the same
 [import path syntax](https://golang.org/cmd/go/#hdr-Import_path_syntax) as
 the `go` command and therefore
 also supports relative import paths like `./...`. Additionally the `...`
@@ -23,35 +23,19 @@ which is accepted by lots of different editors.
 
 ## Purpose
 
-Golint differs from gofmt. Gofmt reformats Go source code, whereas
-golint prints out style mistakes.
+Gofluff differs from gofmt. Gofmt reformats Go source code, whereas golint prints out style
+mistakes.
 
-Golint differs from govet. Govet is concerned with correctness, whereas
-golint is concerned with coding style. Golint is in use at Google, and it
-seeks to match the accepted style of the open source Go project.
+Gofluff differs from govet. Govet is concerned with correctness, whereas golint is concerned with
+coding style.
 
-The suggestions made by golint are exactly that: suggestions.
-Golint is not perfect, and has both false positives and false negatives.
-Do not treat its output as a gold standard. We will not be adding pragmas
-or other knobs to suppress specific warnings, so do not expect or require
-code to be completely "lint-free".
-In short, this tool is not, and will never be, trustworthy enough for its
-suggestions to be enforced automatically, for example as part of a build process.
-Golint makes suggestions for many of the mechanically checkable items listed in
-[Effective Go](https://golang.org/doc/effective_go.html) and the
-[CodeReviewComments wiki page](https://golang.org/wiki/CodeReviewComments).
+Gofluff differs from golint.  Golint has a hard-coded set of warnings matching Google's internal
+style rules.  Gofluff allows team to define and enforce their own subset of these standards.
 
 If you find an established style that is frequently violated, and which
-you think golint could statically check,
-[file an issue](https://github.com/golang/lint/issues).
-
-## Contributions
-
-Contributions to this project are welcome, though please send mail before
-starting work on anything major. Contributors retain their copyright, so we
-need you to fill out
-[a short form](https://developers.google.com/open-source/cla/individual)
-before we can accept your contribution.
+you think gofluff could statically check,
+[file an issue](https://github.com/btubbs/gofluff/issues) or even better, [submit a pull
+request](https://github.com/btubbs/gofluff/pulls).
 
 ## Vim
 
