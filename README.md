@@ -23,14 +23,14 @@ which is accepted by lots of different editors.
 
 ## Purpose
 
-Gofluff differs from gofmt. Gofmt reformats Go source code, whereas golint prints out style
+Gofluff differs from gofmt. Gofmt reformats Go source code, whereas gofluff prints out style
 mistakes.
 
-Gofluff differs from govet. Govet is concerned with correctness, whereas golint is concerned with
+Gofluff differs from govet. Govet is concerned with correctness, whereas gofluff is concerned with
 coding style.
 
 Gofluff differs from golint.  Golint has a hard-coded set of warnings matching Google's internal
-style rules.  Gofluff allows team to define and enforce their own subset of these standards.
+style rules.  Gofluff allows team to define and enforce their own subset of these rules.
 
 If you find an established style that is frequently violated, and which
 you think gofluff could statically check,
@@ -41,13 +41,13 @@ request](https://github.com/btubbs/gofluff/pulls).
 
 Add this to your ~/.vimrc:
 
-    set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim
+    set rtp+=$GOPATH/src/github.com/btubbs/gofluff/misc/vim
 
 If you have multiple entries in your GOPATH, replace `$GOPATH` with the right value.
 
-Running `:Lint` will run golint on the current file and populate the quickfix list.
+Running `:Lint` will run gofluff on the current file and populate the quickfix list.
 
-Optionally, add this to your `~/.vimrc` to automatically run `golint` on `:w`
+Optionally, add this to your `~/.vimrc` to automatically run `gofluff` on `:w`
 
     autocmd BufWritePost,FileWritePost *.go execute 'Lint' | cwindow
 
@@ -56,11 +56,11 @@ Optionally, add this to your `~/.vimrc` to automatically run `golint` on `:w`
 
 Add this to your `.emacs` file:
 
-    (add-to-list 'load-path (concat (getenv "GOPATH")  "/src/github.com/golang/lint/misc/emacs"))
+    (add-to-list 'load-path (concat (getenv "GOPATH")  "/src/github.com/btubbs/gofluff/misc/emacs"))
     (require 'golint)
 
 If you have multiple entries in your GOPATH, replace `$GOPATH` with the right value.
 
-Running M-x golint will run golint on the current file.
+Running M-x gofluff will run gofluff on the current file.
 
 For more usage, see [Compilation-Mode](http://www.gnu.org/software/emacs/manual/html_node/emacs/Compilation-Mode.html).

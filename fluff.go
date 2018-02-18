@@ -4,8 +4,8 @@
 // license that can be found in the LICENSE file or at
 // https://developers.google.com/open-source/licenses/bsd.
 
-// Package lint contains a linter for Go source code.
-package lint
+// Package fluff contains a linter for Go source code.
+package fluff
 
 import (
 	"bufio"

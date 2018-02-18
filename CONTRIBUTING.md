@@ -1,15 +1,11 @@
-# Contributing to Golint
+# Contributing to Gofluff
 
 ## Before filing an issue:
 
-### Are you having trouble building golint?
+### Are you having trouble building gofluff?
 
 Check you have the latest version of its dependencies. Run
 ```
-go get -u github.com/golang/lint
+go get -u github.com/btubbs/gofluff
 ```
 If you still have problems, consider searching for existing issues before filing a new issue.
-
-## Before sending a pull request:
-
-Have you understood the purpose of golint? Make sure to carefully read `README`.

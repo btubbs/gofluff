@@ -4,7 +4,7 @@
 // license that can be found in the LICENSE file or at
 // https://developers.google.com/open-source/licenses/bsd.
 
-// golint lints the Go source files named on its command line.
+// gofluff lints the Go source files named on its command line.
 package main
 
 import (
@@ -16,7 +16,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/golang/lint"
+	fluff "github.com/btubbs/gofluff"
 )
 
 var (
@@ -27,10 +27,10 @@ var (
 
 func usage() {
 	fmt.Fprintf(os.Stderr, "Usage of %s:\n", os.Args[0])
-	fmt.Fprintf(os.Stderr, "\tgolint [flags] # runs on package in current directory\n")
-	fmt.Fprintf(os.Stderr, "\tgolint [flags] [packages]\n")
-	fmt.Fprintf(os.Stderr, "\tgolint [flags] [directories] # where a '/...' suffix includes all sub-directories\n")
-	fmt.Fprintf(os.Stderr, "\tgolint [flags] [files] # all must belong to a single package\n")
+	fmt.Fprintf(os.Stderr, "\tgofluff [flags] # runs on package in current directory\n")
+	fmt.Fprintf(os.Stderr, "\tgofluff [flags] [packages]\n")
+	fmt.Fprintf(os.Stderr, "\tgofluff [flags] [directories] # where a '/...' suffix includes all sub-directories\n")
+	fmt.Fprintf(os.Stderr, "\tgofluff [flags] [files] # all must belong to a single package\n")
 	fmt.Fprintf(os.Stderr, "Flags:\n")
 	flag.PrintDefaults()
 }
@@ -42,7 +42,7 @@ func main() {
 	if flag.NArg() == 0 {
 		lintDir(".")
 	} else {
-		// dirsRun, filesRun, and pkgsRun indicate whether golint is applied to
+		// dirsRun, filesRun, and pkgsRun indicate whether gofluff is applied to
 		// directory, file or package targets. The distinction affects which
 		// checks are run. It is no valid to mix target types.
 		var dirsRun, filesRun, pkgsRun int
@@ -110,7 +110,7 @@ func lintFiles(filenames ...string) {
 		files[filename] = src
 	}
 
-	l := new(lint.Linter)
+	l := new(fluff.Linter)
 	ps, err := l.LintFiles(files)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "%v\n", err)
