@@ -22,6 +22,7 @@ import (
 var (
 	minConfidence = flag.Float64("min_confidence", 0.8, "minimum confidence of a problem to print it")
 	setExitStatus = flag.Bool("set_exit_status", false, "set exit status to 1 if any issues are found")
+	ignore        = flag.String("ignore", "", "comma-delimited list of errors to ignore")
 	suggestions   int
 )
 
@@ -117,11 +118,26 @@ func lintFiles(filenames ...string) {
 		return
 	}
 	for _, p := range ps {
-		if p.Confidence >= *minConfidence {
-			fmt.Printf("%v: %s\n", p.Position, p.Text)
+		if p.Confidence >= *minConfidence && !shouldIgnore(p.Category) {
+			fmt.Printf("%v: (%s) %s\n", p.Position, p.Category, p.Text)
 			suggestions++
 		}
 	}
+}
+
+func shouldIgnore(category string) bool {
+	ignoreNames := strings.Split(*ignore, ",")
+	for _, i := range ignoreNames {
+		// ignore if this category.subcategory ignored
+		if i == category {
+			return true
+		}
+		// also ignore if the overall category ignored
+		if i == strings.Split(category, ".")[0] {
+			return true
+		}
+	}
+	return false
 }
 
 func lintDir(dirname string) {
