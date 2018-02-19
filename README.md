@@ -18,6 +18,24 @@ also supports relative import paths like `./...`. Additionally the `...`
 wildcard can be used as suffix on relative and absolute file paths to recurse
 into them.
 
+To ignore a specific kind of error, use the `-ignore` flag and give it the same
+code shown in parentheses when the error is printed out.  If you see an error
+like this:
+
+    testdata/4.go:27:5: (comments.exportedval) exported var W should have comment or be unexported
+
+You can ignore it like this:
+
+    gofluff -ignore comments.exportedval testdata/4.go
+
+You can ignore a whole class of errors by providing just the parent category:
+
+    gofluff -ignore comments testdata/4.go
+
+You can pass multiple things to ignore by joining them with a comma:
+
+    gofluff -ignore naming.leadingk,naming.allcaps testdata/names.go
+
 The output of this tool is a list of suggestions in Vim quickfix format,
 which is accepted by lots of different editors.
 
@@ -30,7 +48,7 @@ Gofluff differs from govet. Govet is concerned with correctness, whereas gofluff
 coding style.
 
 Gofluff differs from golint.  Golint has a hard-coded set of warnings matching Google's internal
-style rules.  Gofluff allows team to define and enforce their own subset of these rules.
+style rules.  Gofluff allows teams to define and enforce their own subset of these rules.
 
 If you find an established style that is frequently violated, and which
 you think gofluff could statically check,
