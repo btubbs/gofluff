@@ -48,7 +48,7 @@ Gofluff differs from govet. Govet is concerned with correctness, whereas gofluff
 coding style.
 
 Gofluff differs from golint.  Golint has a hard-coded set of warnings matching Google's internal
-style rules.  Gofluff allows teams to define and enforce their own subset of these rules.
+style rules, whereas gofluff allows teams to define and enforce their own subset of these rules.
 
 If you find an established style that is frequently violated, and which
 you think gofluff could statically check,
