@@ -24,6 +24,7 @@ var (
 	setExitStatus = flag.Bool("set_exit_status", false, "set exit status to 1 if any issues are found")
 	ignore        = flag.String("ignore", "", "comma-delimited list of errors to ignore")
 	suggestions   int
+	ignoreParsed  = map[string]bool{}
 )
 
 func usage() {
@@ -39,6 +40,10 @@ func usage() {
 func main() {
 	flag.Usage = usage
 	flag.Parse()
+
+	for _, pat := range strings.Split(*ignore, ",") {
+		ignoreParsed[pat] = true
+	}
 
 	if flag.NArg() == 0 {
 		lintDir(".")
@@ -125,19 +130,13 @@ func lintFiles(filenames ...string) {
 	}
 }
 
+// shouldIgnore tells you whether a given lint violation category should be
+// ignored.  The category will be in dot-separated "general.specific" form, and
+// will return true if the given category, or its more-general parent, is
+// contained in the global list.
 func shouldIgnore(category string) bool {
-	ignoreNames := strings.Split(*ignore, ",")
-	for _, i := range ignoreNames {
-		// ignore if this category.subcategory ignored
-		if i == category {
-			return true
-		}
-		// also ignore if the overall category ignored
-		if i == strings.Split(category, ".")[0] {
-			return true
-		}
-	}
-	return false
+	parent := strings.Split(category, ".")[0]
+	return ignoreParsed[category] || ignoreParsed[parent]
 }
 
 func lintDir(dirname string) {
