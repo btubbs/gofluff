@@ -1,4 +1,5 @@
-Gofluff is a fork of the Golint tool, adding command line flags for suppressing specific warnings.
+Gofluff is a fork of the Golint tool, adding command line flags for selecting
+the specific rules that you want to check.
 
 [![Build Status](https://travis-ci.org/btubbs/gofluff.svg?branch=master)](https://travis-ci.org/btubbs/gofluff)
 
