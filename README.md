@@ -18,7 +18,12 @@ also supports relative import paths like `./...`. Additionally the `...`
 wildcard can be used as suffix on relative and absolute file paths to recurse
 into them.
 
-To ignore a specific kind of error, use the `-ignore` flag and give it the same
+The output of this tool is a list of suggestions in Vim quickfix format,
+which is accepted by lots of different editors.
+
+### Ignoring and Specifying Rules
+
+To ignore a specific rule, use the `-ignore` flag and give it the same
 code shown in parentheses when the error is printed out.  If you see an error
 like this:
 
@@ -28,7 +33,7 @@ You can ignore it like this:
 
     gofluff -ignore comments.exportedval testdata/4.go
 
-You can ignore a whole class of errors by providing just the parent category:
+You can ignore a whole class of rules by providing just the parent category:
 
     gofluff -ignore comments testdata/4.go
 
@@ -36,8 +41,16 @@ You can pass multiple things to ignore by joining them with a comma:
 
     gofluff -ignore naming.leadingk,naming.allcaps testdata/names.go
 
-The output of this tool is a list of suggestions in Vim quickfix format,
-which is accepted by lots of different editors.
+If you only want to check for a specific rule or category of rules, you can use
+the `-rules` flag (a whitelist) instead of the `-ignore` flag (a blacklist).
+
+    gofluff -rules naming,comments testdata/4.go
+
+If you provide both a `-rules` whitelist and a `-ignore` blacklist, the
+blacklist will take precedence.  You can use this to specify whole categories to
+check, and then exclude specific rules within them:
+
+    gofluff -rules comments -ignore comments.exportedval testdata/4.go
 
 ## Purpose
 
